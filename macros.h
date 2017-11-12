@@ -4,8 +4,8 @@
 #define SUCCESS			0
 #define FAILURE			1
 
-#define LIST_NAME_MAX	100
+#define SETTING_NAME_MAX	100
 
-#define FILE_SIZE_MAX	100000
+#define FILE_SIZE_MAX		100000
 
 #endif
