@@ -4,7 +4,7 @@
 /* Process a command */
 int
 CommandProcess
-(char **command);
+(const char**);
 
 /* Print a list of settings */
 int
