@@ -47,3 +47,36 @@ PrintList
 	
 	return SUCCESS;
 }
+
+int
+AdditionSetting
+(const char *SettingName,
+const char *From,
+const char *To)
+{
+	char	FromFilePath[FILENAME_MAX], ToFilePath[FILENAME_MAX];
+	FILE	*FromFilePointer, *ToFilePointer;
+	
+	if(((15 + strlen(SettingName) + 1) > FILENAME_MAX) || ((13 + strlen(SettingName) + 1 ) > FILENAME_MAX))return FAILURE;
+	
+	/* Input path of "from" file to "FromFilePath" */
+	sprintf(FromFilePath, ".%csettings%c%s%cfrom", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName, PATH_BREAK_CHARACTER);
+	
+	/* Input path of "to" file to "ToFilePath" */
+	sprintf(ToFilePath, ".%csettings%c%s%cto", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName, PATH_BREAK_CHARACTER);
+	
+	/* Open file */
+	FromFilePointer = fopen(FromFilePath,	"a");
+	ToFilePointer	= fopen(ToFilePath,		"a");
+	if((FromFilePointer == NULL) || (ToFilePointer == NULL))return FAILURE;
+	
+	/* Write datas */
+	fprintf(FromFilePointer,	"%s\n", From);
+	fprintf(ToFilePointer,		"%s\n", To);
+	
+	/* Close file */
+	fclose(FromFilePointer);
+	fclose(ToFilePointer);
+	
+	return SUCCESS;
+}
