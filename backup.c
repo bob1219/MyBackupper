@@ -1,8 +1,10 @@
 /* Standard Libraries */
 #include <stdio.h>
+#include <string.h>
 
 /* Headers */
 #include "macros.h"
+#include "typedef.h"
 
 int
 backup
