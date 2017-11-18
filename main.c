@@ -20,7 +20,7 @@ char **argv)
 	}
 	
 	/* Process a command */
-	r = CommandProcess(argv);
+	r = CommandProcess((const char**)argv);
 	if(r == SUCCESS)
 	{
 		printf("succeeded.\n");
