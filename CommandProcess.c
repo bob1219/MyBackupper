@@ -3,6 +3,7 @@
 
 /* Header */
 #include "functions.h"
+#include "macros.h"
 
 int
 CommandProcess
