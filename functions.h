@@ -21,7 +21,7 @@ const char*);
 /* Clear settings */
 int
 ClearSetting
-(void);
+(const char*);
 
 /* Run backup */
 int

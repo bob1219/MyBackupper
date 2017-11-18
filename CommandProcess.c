@@ -13,7 +13,7 @@ CommandProcess
 	/* Process a command */
 	if(*(command + 1) == "pl")r = PrintList(*(command + 2));
 	else if(*(command + 1) == "as")r = AdditionSetting(*(command + 2), *(command + 3), *(command + 4));
-	else if(*(command + 1) == "cs")r = ClearSetting();
+	else if(*(command + 1) == "cs")r = ClearSetting(*(command + 2));
 	else if(*(command + 1) == "bu")r = backup(*(command + 1));
 	else
 	{
