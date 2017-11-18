@@ -80,3 +80,31 @@ const char *To)
 	
 	return SUCCESS;
 }
+
+int
+ClearSetting
+(const char *SettingName)
+{
+	char	FromFilePath[FILENAME_MAX], ToFilePath[FILENAME_MAX];
+	FILE	*FilePointer;
+	
+	if(((15 + strlen(SettingName) + 1) > FILENAME_MAX) || ((13 + strlen(SettingName) + 1 ) > FILENAME_MAX))return FAILURE;
+	
+	/* Input path of "from" file to "FromFilePath" */
+	sprintf(FromFilePath, ".%csettings%c%s%cfrom", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName, PATH_BREAK_CHARACTER);
+	
+	/* Input path of "to" file to "ToFilePath" */
+	sprintf(ToFilePath, ".%csettings%c%s%cto", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName, PATH_BREAK_CHARACTER);
+	
+	/* Clear "from" file */
+	FilePointer = fopen(FromFilePath, "w");
+	if(FilePointer == NULL)return FAILURE;
+	fclose(FilePointer);
+	
+	/* Clear "to" file */
+	FilePointer = fopen(ToFilePath, "w");
+	if(FilePointer == NULL)return FAILURE;
+	fclose(FilePointer);
+	
+	return SUCCESS;
+}
