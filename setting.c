@@ -1,6 +1,7 @@
 /* Standard Libraries */
 #include <stdio.h>
 #include <string.h>
+#include <direct.h>
 
 /* Header */
 #include "macros.h"
@@ -54,10 +55,11 @@ AdditionSetting
 const char *From,
 const char *To)
 {
-	char	FromFilePath[FILENAME_MAX], ToFilePath[FILENAME_MAX];
+	char	FromFilePath[FILENAME_MAX], ToFilePath[FILENAME_MAX], SettingDirectory[FILENAME_MAX];
 	FILE	*FromFilePointer, *ToFilePointer;
 	
-	if(((15 + strlen(SettingName) + 1) > FILENAME_MAX) || ((13 + strlen(SettingName) + 1 ) > FILENAME_MAX))return FAILURE;
+	if(((15 + strlen(SettingName) + 1) > FILENAME_MAX) || ((13 + strlen(SettingName) + 1 ) > FILENAME_MAX) || ((11 + strlen(SettingName) + 1) > FILENAME_MAX))
+		return FAILURE;
 	
 	/* Input path of "from" file to "FromFilePath" */
 	sprintf(FromFilePath, ".%csettings%c%s%cfrom", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName, PATH_BREAK_CHARACTER);
@@ -65,10 +67,21 @@ const char *To)
 	/* Input path of "to" file to "ToFilePath" */
 	sprintf(ToFilePath, ".%csettings%c%s%cto", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName, PATH_BREAK_CHARACTER);
 	
+	/* Input path of "setting directory" to "SettingDirectory" */
+	sprintf(SettingDirectory, ".%csettings%c%s", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName);
+	
 	/* Open file */
-	FromFilePointer = fopen(FromFilePath,	"a");
-	ToFilePointer	= fopen(ToFilePath,		"a");
-	if((FromFilePointer == NULL) || (ToFilePointer == NULL))return FAILURE;
+	while(1)
+	{
+		FromFilePointer = fopen(FromFilePath,	"a");
+		ToFilePointer	= fopen(ToFilePath,		"a");
+		if((FromFilePointer == NULL) && (ToFilePointer == NULL))
+		{
+			mkdir(SettingDirectory);
+			continue;
+		}
+		else break;
+	}
 	
 	/* Write datas */
 	fprintf(FromFilePointer,	"%s\n", From);
@@ -85,10 +98,11 @@ int
 ClearSetting
 (const char *SettingName)
 {
-	char	FromFilePath[FILENAME_MAX], ToFilePath[FILENAME_MAX];
+	char	FromFilePath[FILENAME_MAX], ToFilePath[FILENAME_MAX], SettingDirectory[FILENAME_MAX];
 	FILE	*FilePointer;
 	
-	if(((15 + strlen(SettingName) + 1) > FILENAME_MAX) || ((13 + strlen(SettingName) + 1 ) > FILENAME_MAX))return FAILURE;
+	if(((15 + strlen(SettingName) + 1) > FILENAME_MAX) || ((13 + strlen(SettingName) + 1 ) > FILENAME_MAX) || ((11 + strlen(SettingName) + 1) > FILENAME_MAX))
+		return FAILURE;
 	
 	/* Input path of "from" file to "FromFilePath" */
 	sprintf(FromFilePath, ".%csettings%c%s%cfrom", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName, PATH_BREAK_CHARACTER);
@@ -96,9 +110,20 @@ ClearSetting
 	/* Input path of "to" file to "ToFilePath" */
 	sprintf(ToFilePath, ".%csettings%c%s%cto", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName, PATH_BREAK_CHARACTER);
 	
+	/* Input path of "setting directory" to "SettingDirectory" */
+	sprintf(SettingDirectory, ".%csettings%c%s", PATH_BREAK_CHARACTER, PATH_BREAK_CHARACTER, SettingName);
+	
 	/* Clear "from" file */
-	FilePointer = fopen(FromFilePath, "w");
-	if(FilePointer == NULL)return FAILURE;
+	while(1)
+	{
+		FilePointer = fopen(FromFilePath, "w");
+		if(FilePointer == NULL)
+		{
+			mkdir(SettingDirectory);
+			continue;
+		}
+		break;
+	}
 	fclose(FilePointer);
 	
 	/* Clear "to" file */
