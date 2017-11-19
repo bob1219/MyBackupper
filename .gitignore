@@ -1,0 +1,6 @@
+*.BAK
+
+settings/*
+!.gitkeep
+
+*.o
