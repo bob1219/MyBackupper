@@ -34,6 +34,9 @@ backup
 		/* Input from "from" file */
 		if((fgets(from, FILENAME_MAX, FromFilePointer) == NULL) || (fgets(to, FILENAME_MAX, ToFilePointer) == NULL))break;
 		
+		if(from	[strlen(from) - 1] == '\n')from	[strlen(from) - 1] = '\0';
+		if(to	[strlen(to	) - 1] == '\n')to	[strlen(to	) - 1] = '\0';
+		
 		/* Open file */
 		BackupFromFilePointer	= fopen(from,	"rb");
 		BackupToFilePointer		= fopen(to,		"wb");
