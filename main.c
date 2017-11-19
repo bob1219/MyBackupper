@@ -13,7 +13,7 @@ char **argv)
 {
 	int	r;
 	
-	if(argc == 1)
+	if(argc <= 2)
 	{
 		fprintf(stderr, "Argument is missing.\n");
 		return EXIT_FAILURE;
