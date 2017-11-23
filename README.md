@@ -54,16 +54,20 @@ A executable file for Windows.
 Commands
 --------
 * pl  
-Print a list of settings.
+Print a list of settings.  
+Usage: `MyBackupper pl <setting-name>`
 
 * as  
-Addition a setting.
+Addition a setting.  
+Usage: `MyBackupper as <setting-name> <from-file-path> <to-file-path>`
 
 * cs  
-Clear settings.
+Clear settings.  
+Usage: `MyBackupper cs <setting-name>`
 
 * bu  
-Run backup.
+Run backup.  
+Usage: `MyBackupper bu <setting-name>`
 
 How to use (Windows)
 --------------------
@@ -87,3 +91,6 @@ Versions
 --------
 * 1.0 (November 19th, 2017)  
 First version.
+
+* 2.0 (November 23rd, 2017)  
+Support directory backup.
