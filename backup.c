@@ -92,7 +92,7 @@ backup
 			BackupToFilePointer		= fopen(to,		"wb");
 			if((BackupFromFilePointer == NULL) || (BackupToFilePointer == NULL))
 			{
-				fprintf(stderr, "Error: Cannot open file.\n");
+				fprintf(stderr, "Error: Cannot open file \"%s\" or \"%s\".\n", from, to);
 				continue;
 			}
 		
